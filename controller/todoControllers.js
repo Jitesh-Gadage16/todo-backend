@@ -38,12 +38,12 @@ exports.createTodoController = async (req, res)=>{
             user:user.user_id
         })
         console.log(todo)
-        const savedTodo = await todo.save();
-        console.log(savedTodo)
+        // const savedTodo = await todo.save();
+        // console.log(savedTodo)
         res.status(200).json({
             success: true,
             message: "successfully retrieved",
-            todo: savedTodo
+            todo
         })
         
     }
