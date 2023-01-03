@@ -23,7 +23,7 @@ exports.getTodosController = async (req, res)=>{
 exports.createTodoController = async (req, res)=>{
     try{
         const user = req.user;
-        // console.log(user)
+        console.log(user)
         if(!user)
          throw new Error("user not found and you are not allowed");
             
@@ -32,7 +32,7 @@ exports.createTodoController = async (req, res)=>{
         if(!title)
          throw new Error("title can't be empty");
 
-        const todo = new Todo({
+         const todo = await Todo.create({
             title,
             color,
             user:user.user_id
