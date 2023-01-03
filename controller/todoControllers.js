@@ -22,7 +22,7 @@ exports.getTodosController = async (req, res)=>{
 // create todo 
 exports.createTodoController = async (req, res)=>{
     try{
-        const user = req.user;
+        const user = req.user.id;
         console.log(user)
         if(!user)
          throw new Error("user not found and you are not allowed");
@@ -35,7 +35,7 @@ exports.createTodoController = async (req, res)=>{
          const todo = await Todo.create({
             title,
             color,
-            user:user.user_id
+            user
         })
         console.log(todo)
         // const savedTodo = await todo.save();
