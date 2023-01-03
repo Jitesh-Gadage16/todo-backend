@@ -28,17 +28,14 @@ exports.createUserController = async (req, res) => {
         const token = await jwt.sign(data, 'shhhhh');
 
         const cratedUser = newUser;
+        cratedUser.token = token
         cratedUser.password=undefined
 
 
-      res.status(200).cookie('token', token, {
-            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-            httpOnly: false
-        }).json({
-            success: "true",
-            token,
+        res.status(201).json({
+            success : true,
             cratedUser
-        });
+        })
     }
     catch (err) {
         res.status(401).json({

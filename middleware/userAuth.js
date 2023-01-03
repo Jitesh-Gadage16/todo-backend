@@ -1,31 +1,25 @@
 const jwt = require('jsonwebtoken');
 
+
 const userAuth = (req, res, next)=>{
-    const token = req.header('token') || req.cookies.token
+    const token = req.headers.authorization.split(" ")[1];
     // console.log(token)
-    try{
 
-        // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODM5MjY1NWNlNjcyNWEyYWY5YzI3MyIsImlhdCI6MTY2OTU2NzA3N30.U5qzJW1J5b76sA1fgLWsFPYMcXkyySAk6hZNUb0vOWE";
-        if(!token){
-            return res.status(401).json({
-                message: "No entry without auth"
-            })
-        }
-        
-        const users = jwt.verify(token,"shhhhh");
-
-        // console.log(users)
-
-        req.user = {
-            user_id:users.id
-        }
-        
-        
+    console.log("helooooooooo",token);
+    if (!token){
+        return res.status(403).send("Access denied!")
     }
-    catch(err){
-        return res.json({message:"no",err})
+
+    try {
+        const decode = jwt.verify(token, "shhhhh" ); //it'll give us decode value
+        console.log("++"+decode);
+        req.user =decode; // here you can name req.xyz...to any name
+    } catch (error) {
+        console.log(error)
+        res.status(401).send("Token is invalid or session expired");
     }
-    next(); 
+ 
+    return next(); 
 }
 
 module.exports = userAuth;
