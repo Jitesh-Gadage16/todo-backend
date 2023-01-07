@@ -3,8 +3,14 @@ const Todo = require('../models/Todo');
 // get todos 
 exports.getTodosController = async (req, res)=>{
     try{
-        // const user = req.user;
-        const todos = await Todo.find({user:req.user.user_id});
+        const user = req.user;
+        // console.log("userid milega",user)
+        const todos = await Todo.find({user:user.id});
+
+        // console.log("todos of thet user", todos)
+        
+
+
         res.status(200).json({
             success: true,
             message: "successfully retrieved",

@@ -11,23 +11,7 @@ const ToDoSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    tasks:[{
-        main: String,
-        checked:{
-            type:Boolean,
-            default:false,    
-        },
-        taskcreatedat:{
-            type: Date,
-            default: Date.now
-        },
-        taskupdatedAt:{
-            type:Date,
-            default:Date.now
-            
-        },
-        
-    }]
+    tasks:[String]
    
 },
 {
